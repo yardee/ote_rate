@@ -1,10 +1,6 @@
 {
   "name": "OTE Energy Cost Sensor",
   "render_readme": true,
-  "domains": [
-    "binary_sensor",
-    "sensor"
-  ],
   "iot_class": [
     "Cloud Poll"
   ],
