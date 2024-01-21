@@ -44,11 +44,13 @@ class IntegrationOteEntity(CoordinatorEntity):
         super().__init__(coordinator)
         self.config_entry = config_entry
         self.entity_description = entity_description
-        self._attr_unit_of_measurement = (
-            entity_description.unit_of_measurement_getter(coordinator)
-            if callable(entity_description.unit_of_measurement_getter)
-            else None
+
+        if callable(entity_description.unit_of_measurement_getter):
+            self._attr_unit_of_measurement = (
+                entity_description.unit_of_measurement_getter(coordinator)
         )
+        else:
+            self._attr_unit_of_measurement = entity_description.unit_of_measurement
 
     @property
     def key(self):

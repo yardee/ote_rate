@@ -8,6 +8,9 @@ from datetime import datetime
 from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
+from homeassistant.const import (
+    UnitOfTime,
+)
 from homeassistant.components.sensor import (
     SensorEntity,
 )
@@ -41,6 +44,20 @@ sensors = [
         state_getter=lambda s: s.today_costs.hour_prices[datetime.now().hour],
         unit_of_measurement_getter=lambda coordinator: coordinator.settings.energy_price_unit,
         device_class=SensorDeviceClass.MONETARY,
+    ),
+    BaseOteSensorEntityDescription(
+        key="today_highest_price",
+        name="Today Highest Price",
+        state_getter=lambda s: s.today_costs.highest_price,
+        unit_of_measurement_getter=lambda coordinator: coordinator.settings.energy_price_unit,
+        device_class=SensorDeviceClass.MONETARY,
+    ),
+    BaseOteSensorEntityDescription(
+        key="today_highest_price_hour",
+        name="Today Highest Price Hour",
+        state_getter=lambda s: s.today_costs.highest_price_hour,
+        unit_of_measurement=UnitOfTime.HOURS,
+        device_class=SensorDeviceClass.DURATION,
     ),
     BaseOteSensorEntityDescription(
         key="next_day_costs",
